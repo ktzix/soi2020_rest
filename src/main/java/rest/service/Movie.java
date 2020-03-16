@@ -4,18 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType
 public class Movie {
 	
-	
+	@XmlTransient
+	private Integer id;
+
 	@XmlElement
 	private String title;
 	@XmlElement
@@ -23,9 +21,8 @@ public class Movie {
 	@XmlElement
 	private String director;
 	@XmlElement
-	private List<String> actor = new ArrayList<String>();
-	private int id;
-	
+	private List<String> actor = new ArrayList<>();
+
 	private static AtomicLong idCounter = new AtomicLong();
 	
 	
@@ -64,16 +61,16 @@ public class Movie {
 	}
 
 	public void setId(int id) {
-		createID();
+		this.id = id;
 	}
 	
 	
-	public static String createID()
+	public static int createID()
 	{
-		return String.valueOf(idCounter.getAndIncrement());
-		
+		return (int) idCounter.getAndIncrement() ;
+
 	}
-	
+
 }
 
 

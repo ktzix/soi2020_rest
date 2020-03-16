@@ -1,12 +1,7 @@
 package rest.service;
-import java.util.ArrayList;
+import java.util.List;
 
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 
 
 @Path("MovieDatabase")
@@ -14,7 +9,7 @@ public interface IMovieDatabase {
 	
 	@GET
 	@Path("movies")
-	public ArrayList<Movie> getMovies();
+	public List<Movie> getMovies();
 	
 	@GET
 	@Path("movies/{id}")
@@ -27,7 +22,7 @@ public interface IMovieDatabase {
 	
 	@PUT
 	@Path("movies/{id}")
-	public void updateMovie(Movie movie);
+	public void updateMovie(@PathParam("id") Integer id,   Movie movie);
 	
 	@DELETE
 	@Path("movies({id}")
@@ -35,7 +30,7 @@ public interface IMovieDatabase {
 	
 	@GET
 	@Path("movies")
-	public void sortMovies(@QueryParam("year") int year, @QueryParam("orderby") String field);
+	public List<Movie> sortMovies(@QueryParam("year") int year, @QueryParam("orderby") String field);
 	
 	
 }
