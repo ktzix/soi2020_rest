@@ -7,6 +7,7 @@ public class MovieDatabase implements IMovieDatabase{
 
 	static ArrayList<Movie> movies = new ArrayList<>();
 	
+	
 	@Override
 	public ArrayList<Movie> getMovies() {
 		
@@ -31,10 +32,24 @@ public class MovieDatabase implements IMovieDatabase{
 	@Override
 	public void addMovie(Movie movie) {
 		
-		movie.setId(movie.getId());
+		Movie temp = new Movie();
 		
+		if(movie.getActor()!=null) {
+		temp.setActor(movie.getActor());
+		}
+		else
+		{
+			
+		ArrayList<String> emptyTemp = new ArrayList<String>();
+		emptyTemp.add(" ");
+		 temp.setActor(emptyTemp);
 		
-		movies.add(movie);
+		}
+		
+		temp.setDirector(movie.getDirector());
+		temp.setTitle(movie.getTitle());
+		
+		movies.add(temp);
 		
 	}
 

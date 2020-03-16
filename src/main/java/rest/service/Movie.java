@@ -1,6 +1,8 @@
 package rest.service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,9 +23,10 @@ public class Movie {
 	@XmlElement
 	private String director;
 	@XmlElement
-	private ArrayList<String> actor;
+	private List<String> actor = new ArrayList<String>();
 	private int id;
 	
+	private static AtomicLong idCounter = new AtomicLong();
 	
 	
 	public String getTitle() 
@@ -48,11 +51,11 @@ public class Movie {
 		this.director = director;
 	}
 
-	public ArrayList<String> getActor() {
+	public List<String> getActor() {
 		return actor;
 	}
 
-	public void setActor(ArrayList<String> actor) {
+	public void setActor(List<String> actor) {
 		this.actor = actor;
 	}
 
@@ -61,10 +64,15 @@ public class Movie {
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		createID();
 	}
 	
 	
+	public static String createID()
+	{
+		return String.valueOf(idCounter.getAndIncrement());
+		
+	}
 	
 }
 
